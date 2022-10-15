@@ -1,0 +1,82 @@
+Customers table
+-Email VARCHAR(30) NOT NULL ,PRIMARY KEY
+-Firstname VARCHAR(40) NOT NULL
+-Surname VARCHAR(40) NOT NULL
+-Address VARCHAR(90) NOT NULL
+-Phone Number INT NOT NULL
+
+
+Location table
+-ID INT NOT NULL AUTO INCREMENT ,PRIMARY KEY
+-City VARCHAR(30) NOT NULL,
+-Country VARCHAR(25)
+UNIQUE(City,Country)
+
+
+Booking table
+-ID INT NOT NULL AUTO INCREMENT,PRIMARY KEY
+-StartDate DATE NOT NULL
+
+flight table
+-ID INT NOT NULL
+-DepartureTime
+-SourceLocation
+-destinationLocation
+-Economyfare
+-Businessfare
+-Firstfare
+-FK ID REF LOCATION(ID)
+-FK SOURCELOCATION REFERENCES LOCATION(ID)
+-FK DESTINATIONLOCATION REFERENCES LOCATION(ID)
+
+
+hotel table
+-ID
+-Hotelname
+-HotelPriceperNight
+-NumofDaysVisit
+-Address
+-FK ID REFERENCES BOOKING(ID)
+-FK(LOCATION) REFRENCES LOCATION(ID)
+CHECK DAILYCOST>0
+
+///////////////
+
+billing table
+-CustomerID
+-HotelPriceperNight
+-NumofDaysVisit
+-Flight Price
+
+
+
+                    "CREATE TABLE location ("
+                    "ID INTEGER NOT NULL AUTOINCREMENT PRIMARY KEY,"
+                    "City VARCHAR(20),"
+                    "Country VARCHAR(25));"
+			   Airport text				
+
+                    "CREATE TABLE booking ("
+                    "ID integer NOT NULL AUTOINCREMENT PRIMARY KEY,"
+                    "NumOfDays INTEGER,"
+                    "StartDate DATETIME NOT NULL);"
+
+                    "CREATE TABLE flight ("
+                    "ID integer NOT NULL AUTOINCREMENT PRIMARY KEY,"
+                    "DepartureTime TIME,"
+                    "SourceLocation INTEGER,"
+                    "DestinationLocation INTEGER,"
+                    "EconomyFare FLOAT,"
+                    "BusinessFare FLOAT,"
+                    "FirstFare FLOAT,"
+                    "FOREIGN KEY (SourceLocation) REFERENCES location(ID),"
+                    "FOREIGN KEY (DestinationLocation) REFERENCES location(ID));"
+
+                    "CREATE TABLE hotel ("
+                    "ID integer NOT NULL AUTOINCREMENT PRIMARY KEY,"
+                    "HotelName VARCHAR(20),"
+                    "DailyPrice FLOAT,"
+                    "Address VARCHAR(60),"
+                    "Location INTEGER,"
+                    "FOREIGN KEY (ID) REFERENCES booking(ID),"
+                    "FOREIGN KEY (Location) REFERENCES location(ID));";

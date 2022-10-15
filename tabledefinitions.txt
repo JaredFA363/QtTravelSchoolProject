@@ -1,0 +1,60 @@
+CREATE TABLE "booking" (
+	"numdays"	INTEGER,
+	"bookingemail"	TEXT,
+	"flightfare"	REAL,
+	"hotelprice"	REAL,
+	FOREIGN KEY("bookingemail") REFERENCES "customer"("email")
+);
+
+CREATE TABLE "customer" (
+	"email"	TEXT,
+	"firstname"	TEXT,
+	"surname"	TEXT,
+	"phone"	TEXT,
+	"address"	TEXT,
+	"cust_id"	INTEGER NOT NULL DEFAULT 1,
+	PRIMARY KEY("cust_id" AUTOINCREMENT)
+);
+
+CREATE TABLE "flight" (
+	"init_location"	TEXT,
+	"final_location"	TEXT,
+	"class"	REAL,
+	"deptime"	TEXT,
+	"return_time"	TEXT,
+	"cust_id"	INTEGER,
+	FOREIGN KEY("cust_id") REFERENCES "customer"("cust_id")
+);
+
+CREATE TABLE "holidaycountry" (
+	"id"	INTEGER,
+	"country"	TEXT,
+	"airport"	TEXT,
+	PRIMARY KEY("id")
+);
+
+CREATE TABLE "holidayflight" (
+	"destcountry"	TEXT,
+	"sourcecountry"	TEXT,
+	"econfare"	REAL,
+	"businessfare"	REAL,
+	"firstfare"	REAL,
+	"id"	INTEGER,
+	PRIMARY KEY("id")
+);
+
+CREATE TABLE "holidayhotel" (
+	"hotelname"	INTEGER,
+	"dailyprice"	INTEGER,
+	"address"	INTEGER,
+	"country"	INTEGER,
+	FOREIGN KEY("country") REFERENCES "holidaycountry"("country")
+);
+
+CREATE TABLE "hotelbooking" (
+	"startdate"	TEXT,
+	"enddate"	TEXT,
+	"hotel"	TEXT,
+	"numofdays"	INTEGER,
+	"cust_id"	INTEGER
+);
